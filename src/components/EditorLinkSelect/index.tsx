@@ -9,9 +9,7 @@ type Props = {
 };
 
 const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
-  const [draftLink, setDraftLink] = useState(
-    editor?.getAttributes("link").href
-  );
+  const [draftLink, setDraftLink] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -20,9 +18,7 @@ const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (draftLink === "")
-      editor.chain().focus().extendMarkRange("link").unsetLink().run();
-    else {
+    if (draftLink.length > 0) {
       editor
         .chain()
         .focus()
@@ -30,7 +26,7 @@ const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
         .setLink({ href: draftLink })
         .run();
     }
-    
+
     closeLinkSelect();
   };
 

@@ -6,6 +6,10 @@ const Spacer = styled.div`
   align-items: center;
 `;
 
+const LastItem = styled.div`
+  margin-left: auto;
+`;
+
 const Toolbar = styled.div`
   display: flex;
   gap: 1.25rem;
@@ -14,7 +18,8 @@ const Toolbar = styled.div`
 `;
 
 type ButtonProps = React.PropsWithChildren<{
-  isActive: boolean;
+  isActive?: boolean;
+  inverted?: boolean;
 }>;
 
 const EditorButton = styled.button<ButtonProps>`
@@ -31,7 +36,15 @@ const EditorButton = styled.button<ButtonProps>`
           color: #fff;
         `
       : ""}
+
+  ${(p) =>
+    p.inverted
+      ? css`
+          background-color: #000;
+          color: #fff;
+        `
+      : ""}
 `;
 
-const S = { Toolbar, EditorButton, Spacer };
+const S = { Toolbar, EditorButton, Spacer, LastItem };
 export default S;

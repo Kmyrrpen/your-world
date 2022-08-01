@@ -1,9 +1,8 @@
 import { Editor } from "@tiptap/react";
-import { showLinkSelect } from "../Editor";
 import S from "./styles";
 
 type Props = {
-  editor: Editor | null;
+  editor: Editor;
 };
 
 const chainFocus = (editor: Editor) => editor.chain().focus();
@@ -11,7 +10,9 @@ const toggleHeading = (editor: Editor, level: 1 | 2 | 3 | 4) =>
   chainFocus(editor).toggleHeading({ level }).run();
 
 const EditorToolbar: React.FC<Props> = ({ editor }) => {
-  if (!editor) return <></>;
+  const saveEditor = () => {
+    editor;
+  };
 
   return (
     <S.Toolbar>
@@ -55,7 +56,7 @@ const EditorToolbar: React.FC<Props> = ({ editor }) => {
           OL
         </S.EditorButton>
         <S.EditorButton
-          onClick={() => showLinkSelect()}
+          onClick={() => editor.commands.showLinkSelect()}
           isActive={editor.isActive("link")}
         >
           a
@@ -84,6 +85,14 @@ const EditorToolbar: React.FC<Props> = ({ editor }) => {
           <s>S</s>
         </S.EditorButton>
       </S.Spacer>
+      <S.LastItem>
+        <S.EditorButton
+          onClick={() => chainFocus(editor).saveEditor().run()}
+          inverted
+        >
+          Save
+        </S.EditorButton>
+      </S.LastItem>
     </S.Toolbar>
   );
 };

@@ -11,6 +11,7 @@ const ModalWrapper = styled.div`
   align-items: center;
   padding: 4rem 2.5rem;
   background-color: #00000022;
+  z-index: 50;
 `;
 
 const Modal = styled.div`

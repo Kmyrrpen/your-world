@@ -6,9 +6,14 @@ const EditorWrapper = styled.div`
     min-height: 20rem;
     padding: 1.5rem;
     border-radius: 5px;
-    border: 2px solid black;
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
+
+    .editor-content {
+      display: flex;
+      flex-grow: 1;
+    }
 
   .ProseMirror {
     width: 100%;
