@@ -1,35 +1,40 @@
-import dispatch from "@/app/dispatch";
-import { Meta } from "@/app/types";
-import { SET_META } from "@/app/world/actions";
-import React, { useState } from "react";
+import Link from "@tiptap/extension-link";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { proxy, useSnapshot } from "valtio";
+import EditorLinkSelect from "../EditorLinkSelect";
+import EditorToolbar from "../EditorToolbar";
+import S from "./styles";
 
-type Props = {
-  meta: Meta;
-};
+// NOTE: hmr and tiptap don't mix well
+// https://github.com/ueberdosis/tiptap/issues/1451
 
-const Editor: React.FC<Props> = ({ meta }) => {
-  const [draftMeta, setDraftMeta] = useState(meta);
+const linkSelectState = proxy({ isOpen: false });
+export const showLinkSelect = () => (linkSelectState.isOpen = true);
+export const closeLinkSelect = () => (linkSelectState.isOpen = false);
 
-  const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setDraftMeta((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+const Editor: React.FC = () => {
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3, 4],
+        },
+      }),
+      Link,
+    ],
+    content: "",
+  });
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    dispatch(SET_META(draftMeta));
-  }
+  const linkSelectSnap = useSnapshot(linkSelectState);
 
+  if (editor === null) return null;
   return (
-    <form onSubmit={onSubmit}>
-      <input onChange={onChange} name="name" value={meta.name} />
-      <textarea
-        onChange={onChange}
-        name="description"
-        value={meta.description}
-      />
-    </form>
+    <S.EditorWrapper>
+      {linkSelectSnap.isOpen ? <EditorLinkSelect editor={editor} /> : null}
+      <EditorToolbar editor={editor} />
+      <EditorContent editor={editor} />
+    </S.EditorWrapper>
   );
 };
 
