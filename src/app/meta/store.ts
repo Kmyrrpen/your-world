@@ -1,15 +1,16 @@
-import { JSONContent } from "@tiptap/react";
-import { proxy } from "valtio";
+import { proxy, ref } from "valtio";
 
 type MetaStoreState = {
-  files: { [id: string]: Meta }
+  files: Map<string, Meta>
 }
 
 export type Meta = {
-  content: JSONContent;
+  title: string;
+  description: string;
+  content: string;
   id: string;
 }
 
 export const metaStore = proxy<MetaStoreState>({
-  files: {}
+  files: ref(new Map())
 });

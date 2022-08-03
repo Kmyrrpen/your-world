@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tiptap/react";
-
-import { closeLinkSelect } from "../Editor";
 import S from "./styles";
 
 type Props = {
@@ -24,14 +22,15 @@ const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
         .focus()
         .extendMarkRange("link")
         .setLink({ href: draftLink })
+        .closeLinkSelect()
         .run();
+    } else {
+      editor.commands.closeLinkSelect();
     }
-
-    closeLinkSelect();
   };
 
   return (
-    <S.ModalWrapper onClick={() => closeLinkSelect()}>
+    <S.ModalWrapper onClick={() => editor.commands.closeLinkSelect()}>
       <S.Modal onClick={(e) => e.stopPropagation()}>
         <form onSubmit={onSubmit}>
           <S.LinkInput

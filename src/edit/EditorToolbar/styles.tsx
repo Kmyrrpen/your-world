@@ -1,8 +1,12 @@
 import styled, { css } from "styled-components";
 
-const Spacer = styled.div`
+type SpacerProps = {
+  larger?: boolean;
+};
+
+const Spacer = styled.div<SpacerProps>`
   display: flex;
-  gap: 0.2rem;
+  gap: ${(p) => (p.larger ? "0.5rem" : "0.2rem")};
   align-items: center;
 `;
 
@@ -17,12 +21,11 @@ const Toolbar = styled.div`
   margin-bottom: 1rem;
 `;
 
-type ButtonProps = React.PropsWithChildren<{
+type IconProps = {
   isActive?: boolean;
-  inverted?: boolean;
-}>;
+};
 
-const EditorButton = styled.button<ButtonProps>`
+const EditorIcon = styled.button<IconProps>`
   min-width: 1.5rem;
   padding: 0.3rem;
   background-color: #fff;
@@ -36,15 +39,15 @@ const EditorButton = styled.button<ButtonProps>`
           color: #fff;
         `
       : ""}
-
-  ${(p) =>
-    p.inverted
-      ? css`
-          background-color: #000;
-          color: #fff;
-        `
-      : ""}
 `;
 
-const S = { Toolbar, EditorButton, Spacer, LastItem };
+const EditorButton = styled.button`
+  min-width: 2.5rem;
+  padding: 0.3rem 0.4rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+`;
+
+const S = { Toolbar, EditorIcon, Spacer, LastItem, EditorButton };
 export default S;

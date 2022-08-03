@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-const Home = styled.div`
+const Edit = styled.div`
   padding: 5rem 2.5rem;
-  min-height: 100vh;
+  max-width: 52.5rem;
+  margin: 0 auto;
 `
 
-const S = { Home };
+const S = { Edit };
 export default S;

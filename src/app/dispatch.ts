@@ -1,5 +1,11 @@
-import { createChain } from "sculk";
+import { createChain, Flow } from "sculk";
 import { metaChain } from "./meta/flows";
 
-const dispatch = createChain(metaChain);
+const logger: Flow = (action, next) => {
+  console.log(action.type);
+  console.log(action.payload);
+  return next(action);
+};
+
+const dispatch = createChain(logger, metaChain);
 export default dispatch;

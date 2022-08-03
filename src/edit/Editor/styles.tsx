@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const EditorWrapper = styled.div`
-    margin: auto;
-    max-width: 50rem;
     min-height: 20rem;
     padding: 1.5rem;
     border-radius: 5px;
