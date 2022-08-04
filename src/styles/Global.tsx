@@ -13,6 +13,14 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     min-height: 100vh;
+    font-family: 'Merriweather', serif;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.5rem;
   }
 `
 

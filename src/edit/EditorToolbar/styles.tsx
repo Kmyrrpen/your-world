@@ -41,13 +41,5 @@ const EditorIcon = styled.button<IconProps>`
       : ""}
 `;
 
-const EditorButton = styled.button`
-  min-width: 2.5rem;
-  padding: 0.3rem 0.4rem;
-  background-color: #000;
-  color: #fff;
-  border: none;
-`;
-
-const S = { Toolbar, EditorIcon, Spacer, LastItem, EditorButton };
+const S = { Toolbar, EditorIcon, Spacer, LastItem };
 export default S;

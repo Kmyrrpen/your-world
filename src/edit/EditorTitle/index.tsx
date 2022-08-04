@@ -1,15 +1,27 @@
 import { Editor } from "@tiptap/react";
+import styled from "styled-components";
 
 type Props = {
-  title: string;
   editor: Editor;
 };
 
-const EditorTitle: React.FC<Props> = ({ title, editor }) => {
+const S = {
+  Input: styled.input`
+    font-size: 3rem;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    margin-bottom: 1rem;
+    font-family: inherit;
+  `
+}
+
+const EditorTitle: React.FC<Props> = ({ editor }) => {
   return (
-    <input
-      defaultValue={title}
+    <S.Input
+      defaultValue={editor.storage.customMods.title}
       onChange={(e) => editor.commands.setTitle(e.target.value)}
+      placeholder="Title..."
     />
   );
 };

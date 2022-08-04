@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
-import Container from "../Container";
+import S from "./styles";
+
+// for custom navbars
+export const NavbarStyles = { ...S };
 
 const Navbar: React.FC = () => {
   return (
-    <Container>
+    <S.Navbar>
       <Link to="/">Dashboard</Link>
-      <Link to="/new">Create Article</Link>
-    </Container>
-  )
-}
+      <Link to="/new">Create New</Link>
+    </S.Navbar>
+  );
+};
 
 export default Navbar;

@@ -6,7 +6,7 @@ import Link from "@tiptap/extension-link";
 import dispatch from "@/app/dispatch";
 import { setMeta } from "@/app/meta/flows";
 import { Meta } from "@/app/meta/store";
-import { getDescription } from "./util";
+import { getDescription } from "./Editor/util";
 
 declare module "@tiptap/react" {
   interface Commands<ReturnType> {
@@ -133,7 +133,11 @@ function initializeEditorConfig(
         openOnClick: false,
         autolink: false,
       }),
-      StarterKit,
+      StarterKit.configure({
+        heading: {
+          levels: [2, 3, 4]
+        }
+      }),
       CustomMods.configure(customConfig),
     ],
   };

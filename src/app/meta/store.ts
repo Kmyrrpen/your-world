@@ -1,7 +1,7 @@
-import { proxy, ref } from "valtio";
+import { proxy } from "valtio";
 
 type MetaStoreState = {
-  files: Map<string, Meta>
+  files: { [key: string]: Meta }
 }
 
 export type Meta = {
@@ -12,5 +12,5 @@ export type Meta = {
 }
 
 export const metaStore = proxy<MetaStoreState>({
-  files: ref(new Map())
+  files: {}
 });

@@ -6,7 +6,7 @@ const DashboardList: React.FC = () => {
   const { files } = useSnapshot(metaStore);
   return (
     <div>
-      {Array.from(files.values()).map((meta) => (
+      {Array.from(Object.entries(files)).map(([_, meta]) => (
         <DashboardItem meta={meta} key={meta.id} />
       ))}
     </div>

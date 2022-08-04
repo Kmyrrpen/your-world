@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import { Editor } from "@tiptap/react";
 import S from "./styles";
 
@@ -15,10 +16,10 @@ const EditorToolbar: React.FC<Props> = ({ editor }) => {
       <>
         <S.Spacer>
           <S.EditorIcon
-            onClick={() => toggleHeading(editor, 1)}
-            isActive={editor.isActive("heading", { level: 1 })}
+            onClick={() => chainFocus(editor).setParagraph().run()}
+            isActive={editor.isActive("paragraph")}
           >
-            H1
+            <strong>P</strong>
           </S.EditorIcon>
           <S.EditorIcon
             onClick={() => toggleHeading(editor, 2)}
@@ -83,18 +84,6 @@ const EditorToolbar: React.FC<Props> = ({ editor }) => {
           </S.EditorIcon>
         </S.Spacer>
       </>
-      <S.LastItem>
-        <S.Spacer larger>
-          <S.EditorButton
-            onClick={() => chainFocus(editor).toggleEditor().run()}
-          >
-            {editor.isEditable ? "Read" : "Edit"}
-          </S.EditorButton>
-          <S.EditorButton onClick={() => chainFocus(editor).saveEditor().run()}>
-            Save
-          </S.EditorButton>
-        </S.Spacer>
-      </S.LastItem>
     </S.Toolbar>
   );
 };

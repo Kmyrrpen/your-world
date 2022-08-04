@@ -1,9 +1,9 @@
+import { contentWidth } from "@/styles/constants";
 import styled from "styled-components";
 
 const Edit = styled.div`
-  padding: 5rem 2.5rem;
-  max-width: 52.5rem;
-  margin: 0 auto;
+  padding: 1rem 0 4rem;
+  ${contentWidth}
 `
 
 const S = { Edit };
