@@ -10,10 +10,6 @@ const Spacer = styled.div<SpacerProps>`
   align-items: center;
 `;
 
-const LastItem = styled.div`
-  margin-left: auto;
-`;
-
 const Toolbar = styled.div`
   display: flex;
   gap: 1.25rem;
@@ -41,5 +37,5 @@ const EditorIcon = styled.button<IconProps>`
       : ""}
 `;
 
-const S = { Toolbar, EditorIcon, Spacer, LastItem };
+const S = { Toolbar, EditorIcon, Spacer };
 export default S;

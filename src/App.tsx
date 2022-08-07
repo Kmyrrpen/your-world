@@ -1,14 +1,21 @@
+import { useSnapshot } from "valtio";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./dashboard/Page";
-import Edit from "./edit/Page";
+import { ThemeProvider } from "styled-components";
+import { themeStore } from "./app/theme/store";
+import Dashboard from "./dashboard/Dashboard";
+import Edit from "./edit/Edit";
 
 const App: React.FC = () => {
+  const { theme } = useSnapshot(themeStore);
+
   return (
     <>
-      <Routes>
-        <Route index element={<Dashboard />} />
-        <Route path="/:id" element={<Edit />} />
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/:id" element={<Edit />} />
+        </Routes>
+      </ThemeProvider>
     </>
   );
 };

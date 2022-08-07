@@ -1,45 +1,47 @@
-import dispatch from "@/app/dispatch";
+import { Link } from "react-router-dom";
 import { deleteMeta } from "@/app/meta/flows";
 import { Meta } from "@/app/meta/store";
+import dispatch from "@/app/dispatch";
 import Button from "@/components/Button";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 type Props = {
   meta: Meta;
 };
 
-const S = {
-  Item: styled.div`
+const S = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid ${(p) => p.theme.borderColor};
+  border-radius: 5px;
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .description {
+    min-height: 5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .buttons {
+    margin-top: auto;
     display: flex;
-    flex-direction: column;
-    padding: 1.5rem;
-    border: 1px solid #000;
-    border-radius: 5px;
-
-    .title {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .description {
-      min-height: 5rem;
-      padding-bottom: 1.5rem;
-    }
-
-    .buttons {
-      margin-top: auto;
-      display: flex;
-      justify-content: flex-end;
-      gap: 1.5rem;
-    }
-  `,
-};
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+`;
 
 const DashboardItem: React.FC<Props> = ({ meta }) => {
   return (
-    <S.Item>
-      <h2 className="title">{meta.title}</h2>
+    <S>
+      <Link className="title" to={`${meta.id}`}>
+        <h2>{meta.title}</h2>
+      </Link>
       <div
         className="description"
         dangerouslySetInnerHTML={{
@@ -47,10 +49,14 @@ const DashboardItem: React.FC<Props> = ({ meta }) => {
         }}
       ></div>
       <div className="buttons">
-        <Button red onClick={() => dispatch(deleteMeta(meta.id))}>Delete</Button>
-        <Button as={Link} to={`/${meta.id}`}>Edit</Button>
+        <Button red onClick={() => dispatch(deleteMeta(meta.id))}>
+          Delete
+        </Button>
+        <Button as={Link} to={`${meta.id}?edit=true`}>
+          Edit
+        </Button>
       </div>
-    </S.Item>
+    </S>
   );
 };
 

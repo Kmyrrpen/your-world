@@ -6,7 +6,7 @@ import Link from "@tiptap/extension-link";
 import dispatch from "@/app/dispatch";
 import { setMeta } from "@/app/meta/flows";
 import { Meta } from "@/app/meta/store";
-import { getDescription } from "./Editor/util";
+import { getDescription } from "./util";
 
 declare module "@tiptap/react" {
   interface Commands<ReturnType> {
@@ -37,7 +37,8 @@ declare module "@tiptap/react" {
 
 interface CustomOptions {
   title: string;
-  id: string;
+  // options are memoized inside tiptap, must call fn instead.
+  id: string | (() => string);
 }
 
 interface CustomStorage {
@@ -49,16 +50,21 @@ interface CustomStorage {
 const CustomMods = Extension.create<CustomOptions, CustomStorage>({
   name: "customMods",
 
+  onCreate() {
+    console.log(this.storage.id);
+  },
+
   addOptions() {
     return {
       title: "",
-      id: nanoid(),
+      id: nanoid,
     };
   },
 
   addStorage() {
+    const id = this.options.id;
     return {
-      id: this.options.id,
+      id: typeof id === "string" ? id : id(),
       title: this.options.title,
       showLinkSelect: false,
     };
@@ -123,11 +129,13 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
 });
 
 function initializeEditorConfig(
-  meta: Meta | undefined
+  meta: Meta | undefined, startEditable: boolean
 ): Partial<EditorOptions> {
   const customConfig = meta ? { title: meta.title, id: meta.id } : {};
+  console.log(meta);
   return {
     content: meta?.content || "",
+    editable: startEditable,
     extensions: [
       Link.configure({
         openOnClick: false,
@@ -135,8 +143,8 @@ function initializeEditorConfig(
       }),
       StarterKit.configure({
         heading: {
-          levels: [2, 3, 4]
-        }
+          levels: [2, 3, 4],
+        },
       }),
       CustomMods.configure(customConfig),
     ],

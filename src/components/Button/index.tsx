@@ -10,6 +10,7 @@ const Button = styled.button<Props>`
   background-color: ${(p) => (p.red ? "#ca4d44" : "#000")};
   color: #fff;
   border: none;
+  font-size: 0.9rem;
   font-family: inherit;
   text-decoration: none;
   cursor: pointer;

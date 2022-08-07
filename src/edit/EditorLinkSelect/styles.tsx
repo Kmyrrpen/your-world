@@ -12,19 +12,34 @@ const ModalWrapper = styled.div`
   padding: 4rem 2.5rem;
   background-color: #00000022;
   z-index: 50;
+
+  .modal {
+    width: 100%;
+    max-width: 32rem;
+    min-height: 10rem;
+    padding: 1rem;
+    background-color: #fff;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .link-input {
+    width: 100%;
+    font-size: 1rem;
+    font-family: inherit;
+    border: none;
+    border-bottom: 1px solid ${(p) => p.theme.borderColor};
+    outline: none;
+
+    &:focus {
+      border-bottom-width: 2px;
+    }
+  }
 `;
 
-const Modal = styled.div`
-  width: 100%;
-  max-width: 32rem;
-  min-height: 10rem;
-  padding: 1rem;
-  background-color: #fff;
-`;
-
-const LinkInput = styled.input`
-  width: 100%;
-`
-
-const S = { ModalWrapper, Modal, LinkInput };
+const S = { ModalWrapper };
 export default S;

@@ -8,12 +8,12 @@ type Props = {
 
 const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
   const [draftLink, setDraftLink] = useState("");
-
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
+  if (!editor.storage.customMods.showLinkSelect) return null;
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (draftLink.length > 0) {
@@ -31,15 +31,18 @@ const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
 
   return (
     <S.ModalWrapper onClick={() => editor.commands.closeLinkSelect()}>
-      <S.Modal onClick={(e) => e.stopPropagation()}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h2 className="title">Attach Link</h2>
         <form onSubmit={onSubmit}>
-          <S.LinkInput
+          <input
+            className="link-input"
+            spellCheck="false"
             ref={inputRef}
             value={draftLink}
             onChange={(e) => setDraftLink(e.target.value)}
           />
         </form>
-      </S.Modal>
+      </div>
     </S.ModalWrapper>
   );
 };

@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import { Editor } from "@tiptap/react";
 import S from "./styles";
 
@@ -11,6 +10,7 @@ const toggleHeading = (editor: Editor, level: 1 | 2 | 3 | 4) =>
   chainFocus(editor).toggleHeading({ level }).run();
 
 const EditorToolbar: React.FC<Props> = ({ editor }) => {
+  if (!editor.isEditable) return null;
   return (
     <S.Toolbar>
       <>

@@ -1,7 +1,7 @@
-import Button from "@/components/Button";
-import { NavbarStyles as S } from "@/components/Navbar";
 import { Editor } from "@tiptap/react";
 import { Link } from "react-router-dom";
+import Button from "@/components/Button";
+import { NavbarStyles as S } from "@/components/Navbar";
 
 type Props = {
   editor: Editor | null;
@@ -19,17 +19,19 @@ const EditorNavbar: React.FC<Props> = ({ editor }) => {
   };
 
   return (
-    <S.Navbar>
-      <Link to="/">Dashboard</Link>
-      <S.LastItem>
-        <S.Spacer>
+    <S>
+      <Button as={Link} to="/dashboard">
+        Dashboard
+      </Button>
+      <div className="last-item">
+        <div className="spacer">
           <Button onClick={toggleEditor}>
             {editor && editor.isEditable ? "Read" : "Edit"}
           </Button>
           <Button onClick={saveEditor}>Save</Button>
-        </S.Spacer>
-      </S.LastItem>
-    </S.Navbar>
+        </div>
+      </div>
+    </S>
   );
 };
 

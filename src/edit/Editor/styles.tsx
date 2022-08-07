@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
-const EditorWrapper = styled.div`
-    min-height: 20rem;
-    padding: 1.5rem;
-    border-radius: 5px;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
+const S = styled.div`
+  min-height: 20rem;
+  padding: 1.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 
-    .editor-content {
-      display: flex;
-      flex-grow: 1;
-    }
+  .editor-content {
+    display: flex;
+    flex-grow: 1;
+  }
 
   .ProseMirror {
     width: 100%;
@@ -20,7 +19,6 @@ const EditorWrapper = styled.div`
       outline: none;
     }
   }
-`
+`;
 
-const S = { EditorWrapper };
 export default S;
