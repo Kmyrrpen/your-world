@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { deleteMeta, Meta } from '@/app/world/store';
+import { deleteMeta, Meta } from '@/app/world';
 import dispatch from '@/app/dispatch';
 import Button from '@/components/Button';
 import styled from 'styled-components';

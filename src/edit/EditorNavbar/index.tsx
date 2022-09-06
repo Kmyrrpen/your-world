@@ -7,6 +7,7 @@ type Props = {
   editor: Editor | null;
 };
 
+// replaces the normal navbar, like the toolbar, it's just here to call editor commands
 const EditorNavbar: React.FC<Props> = ({ editor }) => {
   const toggleEditor = () => {
     if (!editor) return;

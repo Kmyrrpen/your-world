@@ -1,10 +1,8 @@
-// hack to enable syntax highlighting without using styled components
-// wish there was a fix but ¯\_(ツ)_/¯
 const constants = {
-  contentWidth: `
-    max-width: 60.5rem;
-    width: 100%;
-  `,
+  contentWidth: {
+    default: '100%',
+    max: '65.5rem',
+  },
 };
 
 export interface Theme {

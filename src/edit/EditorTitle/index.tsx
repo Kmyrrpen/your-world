@@ -21,11 +21,12 @@ const S = {
   `,
 };
 
+// Input and Display of the Title
 const EditorTitle: React.FC<Props> = ({ editor }) => {
   return (
     <S.Input
       disabled={!editor.isEditable}
-      defaultValue={editor.storage.customMods.title}
+      defaultValue={editor.storage.__custom__.title}
       onChange={(e) => editor.commands.setTitle(e.target.value)}
       placeholder="Title..."
     />

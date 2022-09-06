@@ -1,5 +1,5 @@
 import { proxy } from 'valtio';
-import { createReducer } from 'wuuber';
+import { Action, createReducer } from 'wuuber';
 
 type MetaStoreState = {
   files: { [key: string]: Meta };
@@ -25,16 +25,16 @@ export const world = proxy<MetaStoreState>({
 });
 
 export const worldReducer = createReducer('world', {
-  setMeta: (action) => {
+  setMeta: (action: Action<Meta>) => {
     world.files[action.payload.id] = action.payload;
   },
-  deleteMeta: (action) => {
+  deleteMeta: (action: Action<string>) => {
     delete world.files[action.payload];
   },
-  setTag: (action) => {
+  setTag: (action: Action<Tag>) => {
     world.tags[action.payload.id] = action.payload;
   },
-  deleteTag: (action) => {
+  deleteTag: (action: Action<string>) => {
     delete world.tags[action.payload];
   },
 });

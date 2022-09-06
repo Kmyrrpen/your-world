@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 const S = styled.div`
+  width: ${(p) => p.theme.constants.contentWidth.default};
+  max-width: ${(p) => p.theme.constants.contentWidth.max};
   display: flex;
   align-items: center;
   padding: 1rem 0;
-  ${(p) => p.theme.constants.contentWidth};
 
   .spacer {
     display: flex;

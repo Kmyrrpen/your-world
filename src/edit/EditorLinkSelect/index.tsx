@@ -6,6 +6,7 @@ type Props = {
   editor: Editor;
 };
 
+// The modal that pops up when attaching a link
 const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
   const [draftLink, setDraftLink] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +14,7 @@ const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
     inputRef.current?.focus();
   }, []);
 
-  if (!editor.storage.customMods.showLinkSelect) return null;
+  if (!editor.storage.__custom__.showLinkSelect) return null;
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (draftLink.length > 0) {

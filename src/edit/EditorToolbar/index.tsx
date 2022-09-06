@@ -1,14 +1,12 @@
 import { Editor } from '@tiptap/react';
+import { chainFocus, toggleHeading } from './util';
 import S from './styles';
 
 type Props = {
   editor: Editor;
 };
 
-const chainFocus = (editor: Editor) => editor.chain().focus();
-const toggleHeading = (editor: Editor, level: 1 | 2 | 3 | 4) =>
-  chainFocus(editor).toggleHeading({ level }).run();
-
+// just components that call editor commands
 const EditorToolbar: React.FC<Props> = ({ editor }) => {
   if (!editor.isEditable) return null;
   return (

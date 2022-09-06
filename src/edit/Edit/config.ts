@@ -4,7 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 
 import dispatch from '@/app/dispatch';
-import { Meta, setMeta } from '@/app/world/store';
+import { Meta, setMeta } from '@/app/world';
 import { getDescription } from './util';
 
 declare module '@tiptap/react' {
@@ -34,32 +34,35 @@ declare module '@tiptap/react' {
   }
 }
 
+// arguments passed to configure object for the custom extension
 interface CustomOptions {
   title: string;
-  // options are memoized inside tiptap, must call fn instead.
-  id: string | (() => string);
+  id: string | undefined;
 }
 
+// additional storage items
 interface CustomStorage {
   id: string;
   title: string;
   showLinkSelect: boolean;
 }
 
-const CustomMods = Extension.create<CustomOptions, CustomStorage>({
-  name: 'customMods',
+const CustomExtension = Extension.create<CustomOptions, CustomStorage>({
+  name: '__custom__',
   addOptions() {
+    // options are memoized inside tiptap even when editor is destroyed.
+    // pass nanoid instead
     return {
       title: '',
-      id: nanoid,
+      id: undefined,
     };
   },
 
   addStorage() {
-    const id = this.options.id;
+    const { id, title } = this.options;
     return {
-      id: typeof id === 'string' ? id : id(),
-      title: this.options.title,
+      title,
+      id: typeof id === 'string' ? id : nanoid(),
       showLinkSelect: false,
     };
   },
@@ -73,9 +76,16 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
           const hasNoLink =
             Object.keys(editor.getAttributes('link')).length === 0;
 
-          if (!selection.empty && hasNoLink) {
-            this.storage.showLinkSelect = true;
-          } else if (!hasNoLink) commands.unsetLink();
+          if (!selection.empty) {
+            if (hasNoLink) {
+              // only show when selecting text that do not have link
+              this.storage.showLinkSelect = true;
+            } else {
+              // else unset the links inside selected text
+              commands.unsetLink();
+            }
+          }
+
           return true;
         },
 
@@ -122,11 +132,14 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
   },
 });
 
-function initializeEditorConfig(
+function initConfig(
   meta: Meta | undefined,
   startEditable: boolean,
 ): Partial<EditorOptions> {
+  // undefined still counts as overriding the default arguments in tiptap
+  // declare config here instead to avoid that
   const customConfig = meta ? { title: meta.title, id: meta.id } : {};
+
   return {
     content: meta?.content || '',
     editable: startEditable,
@@ -140,9 +153,9 @@ function initializeEditorConfig(
           levels: [2, 3, 4],
         },
       }),
-      CustomMods.configure(customConfig),
+      CustomExtension.configure(customConfig),
     ],
   };
 }
 
-export default initializeEditorConfig;
+export default initConfig;

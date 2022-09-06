@@ -1,6 +1,5 @@
-import { useSnapshot } from 'valtio';
 import styled from 'styled-components';
-import { world } from '@/app/world/store';
+import { Meta } from '@/app/world';
 import DashboardItem from '../DashboardItem';
 
 const S = styled.div`
@@ -8,11 +7,14 @@ const S = styled.div`
   gap: 1.5rem;
 `;
 
-const DashboardList: React.FC = () => {
-  const { files } = useSnapshot(world);
+type Props = {
+  files: Meta[];
+};
+
+const DashboardList: React.FC<Props> = ({ files }) => {
   return (
     <S>
-      {Array.from(Object.entries(files)).map(([_, meta]) => (
+      {files.map((meta) => (
         <DashboardItem meta={meta} key={meta.id} />
       ))}
     </S>
