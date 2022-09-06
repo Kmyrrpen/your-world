@@ -1,14 +1,13 @@
-import { nanoid } from "nanoid";
-import { EditorOptions, Extension } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
+import { nanoid } from 'nanoid';
+import { EditorOptions, Extension } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Link from '@tiptap/extension-link';
 
-import dispatch from "@/app/dispatch";
-import { setMeta } from "@/app/meta/flows";
-import { Meta } from "@/app/meta/store";
-import { getDescription } from "./util";
+import dispatch from '@/app/dispatch';
+import { Meta, setMeta } from '@/app/world/store';
+import { getDescription } from './util';
 
-declare module "@tiptap/react" {
+declare module '@tiptap/react' {
   interface Commands<ReturnType> {
     customShortcuts: {
       /**
@@ -48,15 +47,10 @@ interface CustomStorage {
 }
 
 const CustomMods = Extension.create<CustomOptions, CustomStorage>({
-  name: "customMods",
-
-  onCreate() {
-    console.log(this.storage.id);
-  },
-
+  name: 'customMods',
   addOptions() {
     return {
-      title: "",
+      title: '',
       id: nanoid,
     };
   },
@@ -64,7 +58,7 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
   addStorage() {
     const id = this.options.id;
     return {
-      id: typeof id === "string" ? id : id(),
+      id: typeof id === 'string' ? id : id(),
       title: this.options.title,
       showLinkSelect: false,
     };
@@ -77,7 +71,7 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
         ({ commands, editor }) => {
           const selection = editor.state.selection;
           const hasNoLink =
-            Object.keys(editor.getAttributes("link")).length === 0;
+            Object.keys(editor.getAttributes('link')).length === 0;
 
           if (!selection.empty && hasNoLink) {
             this.storage.showLinkSelect = true;
@@ -100,7 +94,7 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
               content,
               title: this.storage.title,
               description: getDescription(content),
-            })
+            }),
           );
           return true;
         },
@@ -121,20 +115,20 @@ const CustomMods = Extension.create<CustomOptions, CustomStorage>({
 
   addKeyboardShortcuts() {
     return {
-      "Ctrl-s": () => this.editor.commands.saveEditor(),
-      "Ctrl-k": () => this.editor.commands.showLinkSelect(),
-      "Ctrl-Q": () => this.editor.commands.toggleEditor(),
+      'Ctrl-s': () => this.editor.commands.saveEditor(),
+      'Ctrl-k': () => this.editor.commands.showLinkSelect(),
+      'Ctrl-Q': () => this.editor.commands.toggleEditor(),
     };
   },
 });
 
 function initializeEditorConfig(
-  meta: Meta | undefined, startEditable: boolean
+  meta: Meta | undefined,
+  startEditable: boolean,
 ): Partial<EditorOptions> {
   const customConfig = meta ? { title: meta.title, id: meta.id } : {};
-  console.log(meta);
   return {
-    content: meta?.content || "",
+    content: meta?.content || '',
     editable: startEditable,
     extensions: [
       Link.configure({

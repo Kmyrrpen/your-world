@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Editor } from "@tiptap/react";
-import S from "./styles";
+import React, { useEffect, useRef, useState } from 'react';
+import { Editor } from '@tiptap/react';
+import S from './styles';
 
 type Props = {
   editor: Editor;
 };
 
 const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
-  const [draftLink, setDraftLink] = useState("");
+  const [draftLink, setDraftLink] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     inputRef.current?.focus();
@@ -20,7 +20,7 @@ const EditorLinkSelect: React.FC<Props> = ({ editor }) => {
       editor
         .chain()
         .focus()
-        .extendMarkRange("link")
+        .extendMarkRange('link')
         .setLink({ href: draftLink })
         .closeLinkSelect()
         .run();

@@ -1,5 +1,5 @@
-import { Editor as EditorType, EditorContent } from "@tiptap/react";
-import S from "./styles";
+import { Editor as EditorType, EditorContent } from '@tiptap/react';
+import S from './styles';
 
 // NOTE: hmr and tiptap don't mix well
 // https://github.com/ueberdosis/tiptap/issues/1451

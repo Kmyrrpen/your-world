@@ -1,12 +1,6 @@
-import { createChain, Flow } from "sculk";
-import { metaChain } from "./meta/flows";
-import { themeChain } from "./theme/flows";
+import { createDispatch } from 'wuuber';
+import { themeReducer } from './theme/store';
+import { worldReducer } from './world/store';
 
-const logger: Flow = (action, next) => {
-  console.log(action.type);
-  console.log(action.payload);
-  return next(action);
-};
-
-const dispatch = createChain(logger, metaChain, themeChain);
+const dispatch = createDispatch(worldReducer, themeReducer);
 export default dispatch;

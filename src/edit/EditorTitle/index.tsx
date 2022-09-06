@@ -1,5 +1,5 @@
-import { Editor } from "@tiptap/react";
-import styled from "styled-components";
+import { Editor } from '@tiptap/react';
+import styled from 'styled-components';
 
 type Props = {
   editor: Editor;
@@ -18,8 +18,8 @@ const S = {
       color: inherit;
       background-color: transparent;
     }
-  `
-}
+  `,
+};
 
 const EditorTitle: React.FC<Props> = ({ editor }) => {
   return (

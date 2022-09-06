@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Navbar from "@/components/Navbar";
-import DashboardList from "../DashboardList";
+import Navbar from '@/components/Navbar';
+import DashboardList from '../DashboardList';
 
 const S = styled.div`
   ${(p) => p.theme.constants.contentWidth};

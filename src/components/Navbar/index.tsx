@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import Button from "../Button";
-import S from "./styles";
+import { Link } from 'react-router-dom';
+import Button from '../Button';
+import S from './styles';
 
 // for custom navbars.
 export const NavbarStyles = S;

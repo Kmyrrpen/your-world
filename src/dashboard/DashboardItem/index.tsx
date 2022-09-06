@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
-import { deleteMeta } from "@/app/meta/flows";
-import { Meta } from "@/app/meta/store";
-import dispatch from "@/app/dispatch";
-import Button from "@/components/Button";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { deleteMeta, Meta } from '@/app/world/store';
+import dispatch from '@/app/dispatch';
+import Button from '@/components/Button';
+import styled from 'styled-components';
 
 type Props = {
   meta: Meta;
@@ -32,7 +31,7 @@ const S = styled.div`
     margin-top: auto;
     display: flex;
     justify-content: flex-end;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 `;
 

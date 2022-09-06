@@ -1,16 +1,16 @@
-import { useMemo } from "react";
-import { useSnapshot } from "valtio";
-import { useEditor } from "@tiptap/react";
-import { useParams, useSearchParams } from "react-router-dom";
-import styled from "styled-components";
+import { useMemo } from 'react';
+import { useSnapshot } from 'valtio';
+import { useEditor } from '@tiptap/react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { metaStore } from "@/app/meta/store";
-import EditorNavbar from "../EditorNavbar";
-import Editor from "../Editor";
-import EditorTitle from "../EditorTitle";
-import EditorLinkSelect from "../EditorLinkSelect";
-import EditorToolbar from "../EditorToolbar";
-import initializeEditorConfig from "./config";
+import { world } from '@/app/world/store';
+import EditorNavbar from '../EditorNavbar';
+import Editor from '../Editor';
+import EditorTitle from '../EditorTitle';
+import EditorLinkSelect from '../EditorLinkSelect';
+import EditorToolbar from '../EditorToolbar';
+import initializeEditorConfig from './config';
 
 const S = styled.div`
   ${(p) => p.theme.constants.contentWidth};
@@ -21,14 +21,14 @@ const S = styled.div`
 
 const Edit: React.FC = () => {
   const { id } = useParams();
-  const { files } = useSnapshot(metaStore);
+  const { files } = useSnapshot(world);
   const [searchParams] = useSearchParams();
-  const startEditable = searchParams.get("edit") === "true" || id === "new";
+  const startEditable = searchParams.get('edit') === 'true' || id === 'new';
 
   const meta = id ? files[id] : undefined;
   const config = useMemo(
     () => initializeEditorConfig(meta, startEditable),
-    [meta]
+    [meta],
   );
 
   const editor = useEditor(config);

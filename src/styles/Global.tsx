@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   html {
@@ -22,6 +22,6 @@ const GlobalStyles = createGlobalStyle`
     align-items: center;
     padding: 0 1.5rem;
   }
-`
+`;
 
 export default GlobalStyles;

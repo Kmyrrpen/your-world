@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 type SpacerProps = {
   larger?: boolean;
@@ -6,7 +6,7 @@ type SpacerProps = {
 
 const Spacer = styled.div<SpacerProps>`
   display: flex;
-  gap: ${(p) => (p.larger ? "0.5rem" : "0.2rem")};
+  gap: ${(p) => (p.larger ? '0.5rem' : '0.2rem')};
   align-items: center;
 `;
 
@@ -34,7 +34,7 @@ const EditorIcon = styled.button<IconProps>`
           background-color: #000;
           color: #fff;
         `
-      : ""}
+      : ''}
 `;
 
 const S = { Toolbar, EditorIcon, Spacer };

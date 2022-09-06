@@ -1,13 +1,22 @@
-import { lightTheme, Theme } from "@/styles/themes";
-import { proxy } from "valtio";
+import { DefaultTheme } from 'styled-components';
+import { darkTheme, lightTheme } from '@/styles/themes';
+import { proxy } from 'valtio';
+import { createReducer } from 'wuuber';
 
 type ThemeStore = {
-  theme: Theme
-}
+  currentTheme: DefaultTheme;
+};
 
 // TODO: set to user's preference instead.
-let userTheme = lightTheme;
+const userTheme = lightTheme;
 
-export const themeStore = proxy<ThemeStore>({
-  theme: userTheme
-})
+export const theme = proxy<ThemeStore>({
+  currentTheme: userTheme,
+});
+export const themeReducer = createReducer('theme', {
+  toggleTheme: () => {
+    theme.currentTheme = lightTheme ? darkTheme : lightTheme;
+  },
+});
+
+export const { toggleTheme } = themeReducer.actions;
